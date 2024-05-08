@@ -19,4 +19,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "hello -> ${{ secrets.SLACK_WEBHOOK_URL }}"
+      - name: notify message
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: |
+            {
+              "key": "value",
+              "foo": "bar"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
