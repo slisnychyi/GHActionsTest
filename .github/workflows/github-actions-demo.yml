@@ -43,14 +43,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      #      - name: run tests
-      #        shell: bash
-      #        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
+#      - name: run tests
+#        shell: bash
+#        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
       - name: Send GitHub trigger payload to Slack Workflow Builder
         id: slack
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          text: "${{ github.workflow }} workflow failed on ${{ env.DEFAULT_BRANCH }} branch in the ${{ github.event.repository.name }} repository!"
+          payload: |
+            {
+              "text": "${{ github.workflow }} workflow failed on ${{ env.DEFAULT_BRANCH }} branch in the ${{ github.event.repository.name }} repository!"
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
 
