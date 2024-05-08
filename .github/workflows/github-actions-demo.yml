@@ -53,6 +53,7 @@ jobs:
         with:
           payload: |
             {
+             "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})",
              "blocks": [
                 {
                   "type": "section",
