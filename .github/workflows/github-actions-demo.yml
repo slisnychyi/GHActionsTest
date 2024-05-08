@@ -43,49 +43,58 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-#      - id: compile-code-sequentially
-#        name: "Compile code sequentially"
-#        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew compileAll --no-parallel --continue --stacktrace
-      - name: run tests
-        shell: bash
-        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
-      - name: notify slack
+#      - name: run tests
+#        shell: bash
+#        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
+      - name: Send GitHub trigger payload to Slack Workflow Builder
         id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel-id: '#general'
           payload: |
             {
-              "text": "GitHub Action failed",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Production deployment check failed* :fire_engine:\n High error rate detected after deployment! Rolling back..."
-                  }
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": ":github: Failed action"
-                      },
-                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                    },
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": ":grafana: Grafana dashboard"
-                      },
-                      "url": "https://<your_organization>.grafana.net/d/my-app-dashboard?from=now-1h&to=now"
-                    }
-                  ]
-                }
-              ]
+              "key": "value",
+              "foo": "bar"
             }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
+
+#      - name: notify slack
+#        id: slack
+#        uses: slackapi/slack-github-action@v1.24.0
+#        if: ${{ failure() }}
+#        with:
+#          channel-id: '#general'
+#          payload: |
+#            {
+#              "text": "GitHub Action failed",
+#              "blocks": [
+#                {
+#                  "type": "section",
+#                  "text": {
+#                    "type": "mrkdwn",
+#                    "text": "*Production deployment check failed* :fire_engine:\n High error rate detected after deployment! Rolling back..."
+#                  }
+#                },
+#                {
+#                  "type": "actions",
+#                  "elements": [
+#                    {
+#                      "type": "button",
+#                      "text": {
+#                        "type": "plain_text",
+#                        "text": ":github: Failed action"
+#                      },
+#                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+#                    },
+#                    {
+#                      "type": "button",
+#                      "text": {
+#                        "type": "plain_text",
+#                        "text": ":grafana: Grafana dashboard"
+#                      },
+#                      "url": "https://<your_organization>.grafana.net/d/my-app-dashboard?from=now-1h&to=now"
+#                    }
+#                  ]
+#                }
+#              ]
+#            }
