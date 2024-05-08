@@ -52,7 +52,7 @@ jobs:
         with:
           payload: |
             {
-              "key": "value",
+              "text": "value",
               "foo": "bar"
             }
         env:
