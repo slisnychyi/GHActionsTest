@@ -53,7 +53,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "test ${{ toJson(github.event) }}"
+              "text": "test ${{ stringify(github.event) }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
