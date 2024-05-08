@@ -7,7 +7,7 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    env:
+#    env:
       #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
     steps:
