@@ -7,7 +7,7 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-      #    env:
+    #    env:
     #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
     steps:
@@ -67,12 +67,12 @@ jobs:
       #        env:
       #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
 
-      - name: notify slack
+
+      - name: Send GitHub trigger payload to Slack Workflow Builder
         id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-#        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.26.0
         with:
-#          payload-file-path: .github/slack/ci_slack_message.json
+          channel-id: 'T072LUVBP7W' # ID of Slack Channel you want to post to
           payload: |
             {
               "blocks": [
@@ -101,7 +101,27 @@ jobs:
                   ]
                 }
               ],
-              "channel-id": "NEW_TARGET_CHANNEL_ID"
+              "channel-id": "T072LUVBP7W"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#
+#      - name: notify slack
+#        id: slack
+#        uses: slackapi/slack-github-action@v1.24.0
+#        #        if: ${{ failure() }}
+#        with:
+#          #          payload-file-path: .github/slack/ci_slack_message.json
+#          payload: |
+#            {
+#              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+#              "blocks": [
+#                {
+#                  "type": "section",
+#                  "text": {
+#                    "type": "mrkdwn",
+#                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+#                  }
+#                }
+#              ]
+#            }
