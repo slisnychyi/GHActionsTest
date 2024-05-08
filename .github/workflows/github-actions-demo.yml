@@ -50,7 +50,7 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          "text": "${{ github.workflow }} workflow failed on ${{ env.DEFAULT_BRANCH }} branch in the ${{ github.event.repository.name }} repository!"
+          text: "${{ github.workflow }} workflow failed on ${{ env.DEFAULT_BRANCH }} branch in the ${{ github.event.repository.name }} repository!"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
 
