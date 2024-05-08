@@ -12,33 +12,39 @@ jobs:
           channel-id: 'SLACK_CHANNEL_ID' # ID of Slack Channel you want to post to
           payload: |
             {
+              "text": "Danny Torrence left a 1 star review for your property.",
               "blocks": [
-                { "type": "divider" },
                 {
-                  "type": "image",
-                  "title": {
-                    "type": "plain_text",
-                    "text": "Slack Slack Slack",
-                    "emoji": true
-                  },
-                  "image_url": "https://media.makeameme.org/created/a-slack-this.jpg",
-                  "alt_text": "marg"
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Danny Torrence left the following review for your property:"
+                  }
                 },
                 {
-                  "type": "actions",
-                  "elements": [
+                  "type": "section",
+                  "block_id": "section567",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
+                  },
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
+                    "alt_text": "Haunted hotel image"
+                  }
+                },
+                {
+                  "type": "section",
+                  "block_id": "section789",
+                  "fields": [
                     {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "${{ github.sha }}"
-                      },
-                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                      "type": "mrkdwn",
+                      "text": "*Average Rating*\n1.0"
                     }
                   ]
                 }
-              ],
-              "channel-id": "NEW_TARGET_CHANNEL_ID"
-            }
+              ]
+        }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
