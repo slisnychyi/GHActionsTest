@@ -1,4 +1,4 @@
-on: [ push ]
+on: [push]
 
 jobs:
   new_push_job:
@@ -9,7 +9,6 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel-id: 'SLACK_CHANNEL_ID' # ID of Slack Channel you want to post to
           payload: |
             {
               "text": "Danny Torrence left a 1 star review for your property.",
@@ -26,7 +25,7 @@ jobs:
                   "block_id": "section567",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
+                    "text": "<https://example.com|Overlook Hotel> \\n :star: \\n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
                   },
                   "accessory": {
                     "type": "image",
@@ -40,11 +39,11 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Average Rating*\n1.0"
+                      "text": "*Average Rating*\\n1.0"
                     }
                   ]
                 }
               ]
-        }
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
