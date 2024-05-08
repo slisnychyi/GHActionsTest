@@ -53,7 +53,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "test {{ github.event.repo.url }}"
+              "text": "test {{ github.repo.url }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
