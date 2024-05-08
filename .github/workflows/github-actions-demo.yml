@@ -76,32 +76,14 @@ jobs:
           payload: |
             {
               "blocks": [
-                { "type": "divider" },
-                {
-                  "type": "image",
-                  "title": {
-                    "type": "plain_text",
-                    "text": "Slack Slack Slack",
-                    "emoji": true
-                  },
-                  "image_url": "https://media.makeameme.org/created/a-slack-this.jpg",
-                  "alt_text": "marg"
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "${{ github.sha }}"
-                      },
-                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                              {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
                     }
-                  ]
                 }
-              ],
-              "channel-id": "T072LUVBP7W"
+              ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
