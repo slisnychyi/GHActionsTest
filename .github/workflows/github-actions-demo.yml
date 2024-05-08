@@ -75,13 +75,14 @@ jobs:
           channel-id: 'T072LUVBP7W' # ID of Slack Channel you want to post to
           payload: |
             {
+              "text": "*Build Failed!* :fire: [View Build](https://github.com/slisnychyi/GHActionsTest/actions/runs/9009403751)",
               "blocks": [
-                              {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-                    }
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Build Failed!* :fire: [View Build](https://github.com/slisnychyi/GHActionsTest/actions/runs/9009403751)"
+                  }
                 }
               ]
             }
