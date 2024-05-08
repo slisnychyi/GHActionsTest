@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
+#      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -47,63 +47,42 @@ jobs:
       #      - name: run tests
       #        shell: bash
       #        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
-      - name: Send GitHub trigger payload to Slack Workflow Builder
+      #      - name: Send GitHub trigger payload to Slack Workflow Builder
+      #        id: slack
+      #        uses: slackapi/slack-github-action@v1.26.0
+      #        with:
+      #          payload: |
+      #            {
+      #             "text": "Build Failed! :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})",
+      #             "blocks": [
+      #                {
+      #                  "type": "section",
+      #                  "text": {
+      #                    "type": "mrkdwn",
+      #                    "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+      #                  }
+      #                }
+      #            ]
+      #            }
+      #        env:
+      #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
+
+      - name: notify slack
         id: slack
-        uses: slackapi/slack-github-action@v1.26.0
+        uses: slackapi/slack-github-action@v1.24.0
+        if: ${{ failure() }}
         with:
           payload: |
             {
-             "text": "Build Failed! :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})",
-             "blocks": [
+              "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+                    "text": "*Production deployment check failed* :fire_engine:\n High error rate detected after deployment! Rolling back..."
                   }
                 }
-            ]
+              ]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
-
-#      - name: notify slack
-#        id: slack
-#        uses: slackapi/slack-github-action@v1.24.0
-#        if: ${{ failure() }}
-#        with:
-#          channel-id: '#general'
-#          payload: |
-#            {
-#              "text": "GitHub Action failed",
-#              "blocks": [
-#                {
-#                  "type": "section",
-#                  "text": {
-#                    "type": "mrkdwn",
-#                    "text": "*Production deployment check failed* :fire_engine:\n High error rate detected after deployment! Rolling back..."
-#                  }
-#                },
-#                {
-#                  "type": "actions",
-#                  "elements": [
-#                    {
-#                      "type": "button",
-#                      "text": {
-#                        "type": "plain_text",
-#                        "text": ":github: Failed action"
-#                      },
-#                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-#                    },
-#                    {
-#                      "type": "button",
-#                      "text": {
-#                        "type": "plain_text",
-#                        "text": ":grafana: Grafana dashboard"
-#                      },
-#                      "url": "https://<your_organization>.grafana.net/d/my-app-dashboard?from=now-1h&to=now"
-#                    }
-#                  ]
-#                }
-#              ]
-#            }
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
