@@ -54,7 +54,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "*Nightly Build ${{ job.status }}!* :fire:\n*Repository:* ${{ github.repository }}\n*Failed build:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "text": ":fire: *Nightly Build ${{ job.status }}!* :fire:\n*Repository:* ${{ github.repository }}\n*Failed build:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
