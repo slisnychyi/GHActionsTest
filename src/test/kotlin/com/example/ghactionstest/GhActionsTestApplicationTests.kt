@@ -8,7 +8,7 @@ class GhActionsTestApplicationTests {
 
   @Test
   fun contextLoads() {
-    assertThat(true).isTrue()
+    assertThat(true).isFalse()
   }
 
 }
