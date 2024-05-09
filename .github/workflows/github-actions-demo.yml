@@ -7,8 +7,8 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    #    env:
-    #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     #      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -54,10 +54,8 @@ jobs:
         with:
           payload: |
             {
-              "text": ":fire: *Nightly Build ${{ job.status }}!* :fire:\n*Repository:* ${{ github.repository }}\n*Failed build:* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "text": ":fire: Nightly Build ${{ job.status }}! :fire:\nRepository: ${{ github.repository }}\nFailed build: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
 #
 #      - name: notify slack
 #        id: slack
