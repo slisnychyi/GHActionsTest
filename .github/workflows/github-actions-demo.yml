@@ -44,30 +44,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      #      - name: run tests
-      #        shell: bash
-      #        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
-      #      - name: Send GitHub trigger payload to Slack Workflow Builder
-      #        id: slack
-      #        uses: slackapi/slack-github-action@v1.26.0
-      #        with:
-      #          payload: |
-      #            {
-      #             "text": "Build Failed! :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})",
-      #             "blocks": [
-      #                {
-      #                  "type": "section",
-      #                  "text": {
-      #                    "type": "mrkdwn",
-      #                    "text": "*Build Failed!* :fire: [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-      #                  }
-      #                }
-      #            ]
-      #            }
-      #        env:
-      #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORFLOW_WEBHOOK }}
-
-
+      - name: run tests
+        shell: bash
+        run: /home/runner/work/GHActionsTest/GHActionsTest/gradlew test --parallel --continue --stacktrace
       - name: Send GitHub trigger payload to Slack Workflow Builder
         id: slack
         uses: slackapi/slack-github-action@v1.26.0
